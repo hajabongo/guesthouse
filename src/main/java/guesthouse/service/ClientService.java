@@ -6,7 +6,6 @@ import guesthouse.domain.Client;
 
 public interface ClientService {
 	
-	Client getClientById(int id);
-	List<Client> getAllEmployees();
+	List<Client> getAllClients();
 
 }

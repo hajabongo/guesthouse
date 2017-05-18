@@ -6,9 +6,6 @@ import guesthouse.domain.Client;
 
 public interface ClientRepository {
 
-	void add(Client client);
-	List<Client> list();
-	Client getClientById(int id);
-	List<Client> getAllEmployees();
+	List<Client> getAllClients();
 	
 }

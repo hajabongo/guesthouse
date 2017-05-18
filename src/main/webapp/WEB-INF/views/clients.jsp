@@ -7,14 +7,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-<title>Pokoje</title>
+<title>Clients</title>
 </head>
 <body>
 	<section>
 		<div class="jumbotron">
 			<div class="container">
-				<h1>Pokoje</h1>
-				<p>Wszystkie pokoje dostępne w naszym pensjonacie</p>
+				<h1>Clients</h1>
+				<p>Wszyscy klienci</p>
 			</div>
 		</div>
 	</section>

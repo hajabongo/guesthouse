@@ -10,15 +10,12 @@ import guesthouse.domain.repository.ClientRepository;
 import guesthouse.service.ClientService;
 
 @Service
-public class ClentServiceImpl implements ClientService {
+public class ClientServiceImpl implements ClientService {
 
 	@Autowired
 	private ClientRepository clientRepository;
 	
-	public Client getClientById(int id) {
-		return clientRepository.getClientById(id);
-	}
-	public List<Client> getAllEmployees() {
-		return clientRepository.getAllEmployees();
+	public List<Client> getAllClients() {
+		return clientRepository.getAllClients();
 	}
 }
