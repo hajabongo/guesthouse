@@ -61,36 +61,43 @@
 			<div class="container">
 				<br>
 				<br>
-				<h1> Pokój </h1>
-				<p> Pokój ()-osobowy </p>
+				<h1> Witaj w "nazwa pensjonatu" </h1>
+				<p> Wyjątkowym i jedynym miejscu w "nazwa miasta" </p>
 			</div>
 		</div>
 	</section>
-	<section class="container">
-		<div class="row">
-			<div class="col-md-5">
-				<h3>${room.description}</h3>
-				<p>Pełen opis pokoju (uzupełnić klasę)</p>
-				<p>
-					<strong>Możliwa dostawka: </strong><span class="label label-warning">(Uzupełnic klasę)</span>
-				</p>
-				<p>
-					<strong>Piętro:</strong> ${room.storey}
-				</p>
-				
-				<h4>${room.price} PLN</h4>
-				<p>
-					<a href="#" class="btn btn-warning btn-large"> 
-					<span class="glyphicon-shopping-cart glyphicon"></span> Zarezerwuj teraz
-					</a> 
-					<a href="<spring:url value="/rooms" />" class="btn btn-default">
-					<span class="glyphicon-hand-left glyphicon"></span> Powrót
-					</a>
-
-				</p>
-
-			</div>
-		</div>
+	
+	<section>
+	
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Pokoje</h2>
+          <p>Oferujemy pokoje 2, 3 i 4 osobowe</p>
+          	<p>
+			<a href=" <spring:url value="/rooms" />
+			"class="btn btn-info">
+			<span class="glyphicon glyphicon-lamp" /></span> Szczegóły &raquo;</a>
+		</p>
+        </div>
+        <div class="col-md-4">
+          <h2>Rekreacja</h2>
+          <p>Wypoczynek, sport i nie tylko! </p>
+          <p>
+			<a href=" <spring:url value="/rooms" />
+			"class="btn btn-info">
+			<span class="glyphicon glyphicon-heart" /></span> Szczegóły &raquo;</a>
+       </div>
+        <div class="col-md-4">
+          <h2>Wyżywienie</h2>
+          <p>Sprawdź co dla Państwa możemy zaoferować</p>
+         <p>
+			<a href=" <spring:url value="/rooms" />
+			"class="btn btn-info">
+			<span class="glyphicon glyphicon-list-alt" /></span> Szczegóły &raquo;</a>
+        </div>
+      </div>
 	</section>
 </body>
 </html>
