@@ -7,5 +7,6 @@ import guesthouse.domain.Client;
 public interface ClientService {
 	
 	List<Client> getAllClients();
+	void addClient(Client newClient);
 
 }

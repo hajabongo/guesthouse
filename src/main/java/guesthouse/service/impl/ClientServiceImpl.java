@@ -23,4 +23,9 @@ public class ClientServiceImpl implements ClientService {
 	public List<Client> getAllClients() {
 		return clientRepository.getAllClients();
 	}
+	
+	@Transactional(readOnly = false)
+	public void addClient(Client newClient) {
+		clientRepository.addClient(newClient);
+	}
 }

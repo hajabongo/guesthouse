@@ -1,5 +1,6 @@
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <html>
@@ -47,8 +48,8 @@
       </ul>
       
           <ul class="nav navbar-nav navbar-right">
-      <li><a href=<spring:url value="/add" />><span class="glyphicon glyphicon-user"></span> Rejestracja</a></li>
-      <li><a href=<spring:url value="/login" />><span class="glyphicon glyphicon-log-in"></span> Logowanie</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Rejestracja</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logowanie</a></li>
     </ul>
 
     </div><!-- /.navbar-collapse -->
@@ -67,39 +68,33 @@
 		</div>
 	</section>
 	
-	<!-- Dotąd kopiować -->
-	
-	<section>
-	
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">
-          <h2>Pokoje</h2>
-          <p>Oferujemy pokoje 2, 3 i 4 osobowe</p>
-          	<p>
-			<a href=" <spring:url value="/rooms" />
-			"class="btn btn-info">
-			<span class="glyphicon glyphicon-lamp" /></span> Szczegóły &raquo;</a>
-		</p>
-        </div>
-        <div class="col-md-4">
-          <h2>Rekreacja</h2>
-          <p>Wypoczynek, sport i nie tylko! </p>
-          <p>
-			<a href=" <spring:url value="/rooms" />
-			"class="btn btn-info">
-			<span class="glyphicon glyphicon-heart" /></span> Szczegóły &raquo;</a>
-       </div>
-        <div class="col-md-4">
-          <h2>Wyżywienie</h2>
-          <p>Sprawdź co dla Państwa możemy zaoferować</p>
-         <p>
-			<a href=" <spring:url value="/rooms" />
-			"class="btn btn-info">
-			<span class="glyphicon glyphicon-list-alt" /></span> Szczegóły &raquo;</a>
-        </div>
-      </div>
-	</section>
+	<div class="container">
+    <div class="row">
+		<div class="col-md-4 col-md-offset-4">
+    		<div class="panel panel-default">
+			  	<div class="panel-heading">
+			    	<h3 class="panel-title">Zaloguj się</h3>
+			 	</div>
+			  	<div class="panel-body">
+			  	<c:if test="${not empty error}">
+					<div class="alert alert-danger">
+						<spring:message code="AbstractUserDetailsAuthenticationProvider.badCredentials"/><br />
+					</div>
+				</c:if>
+			    	<form action="<c:url value="/j_spring_security_check"></c:url>" method="post">
+                    <fieldset>
+			    	  	<div class="form-group">
+			    		    <input class="form-control" placeholder="Nazwa użytkownika" name='j_username' type="text">
+			    		</div>
+			    		<div class="form-group">
+			    			<input class="form-control" placeholder="Hasło" name='j_password'  type="password" value="">
+			    		</div>
+			    		<input class="btn btn-lg btn-success btn-block" type="submit" value="Zaloguj się">
+			    	</fieldset>
+			      	</form>
+			    </div>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
-</html>

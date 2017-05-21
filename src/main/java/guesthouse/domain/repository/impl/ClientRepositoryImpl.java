@@ -23,10 +23,23 @@ public class ClientRepositoryImpl implements ClientRepository {
 	
 	@SuppressWarnings("unchecked")
 	public List<Client> getAllClients() {
-
 		Session session = this.sessionFactory.getCurrentSession();
 		List<Client> clientList = session.createQuery("from Client").list();
 		return clientList;
+	}
+	
+	public void addClient(Client newClient) {	
+		
+//			newClient.setName("Daniel");
+//			newClient.setSurname("Rejsz");
+//			newClient.setCountry("Kudowa-Zdrój");
+//			newClient.setPhoneNumber("609721828");
+//			newClient.setEmailAdress("hajabongo@gmail.com");
+//			newClient.setClientLogin("login");
+//			newClient.setClientPassword("password");
+		
+		Session session = this.sessionFactory.getCurrentSession();
+		session.persist(newClient);
 	}
 
 }
