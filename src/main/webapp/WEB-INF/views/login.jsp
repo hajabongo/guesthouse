@@ -78,7 +78,7 @@
 			  	<div class="panel-body">
 			  	<c:if test="${not empty error}">
 					<div class="alert alert-danger">
-						<spring:message code="AbstractUserDetailsAuthenticationProvider.badCredentials"/><br />
+						<h1 Niepoprawna nazwa użytkownika lub hasło/><br />
 					</div>
 				</c:if>
 			    	<form action="<c:url value="/j_spring_security_check"></c:url>" method="post">

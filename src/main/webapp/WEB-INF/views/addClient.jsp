@@ -57,6 +57,7 @@
 							class="glyphicon glyphicon-user"></span> Rejestracja</a></li>
 					<li><a href=<spring:url value="/login" />><span
 							class="glyphicon glyphicon-log-in"></span> Logowanie</a></li>
+					<li><a href="<c:url value="/j_spring_security_logout" />" class="btn btn-danger btn-mini pull-right">Wyloguj</a></li>
 				</ul>
 
 			</div>
