@@ -33,6 +33,10 @@ public class ClientController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping(value="/client")
+	public String client() {
+		return "client";	
+	}
 	
 	
 	
