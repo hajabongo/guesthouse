@@ -12,11 +12,4 @@ public class HomeController {
 	public String welcome() {
 		return "home";
 	}
-	
-	@RequestMapping("/test")
-	public String test(Model model) {
-		model.addAttribute("tytul", "Witaj w \"nazwa pensjonatu\"");
-		model.addAttribute("podtytul", "Wyj¹tkowym i jedynym miejscu w \"nazwa miasta\"");
-		return "index";
-	}
 }

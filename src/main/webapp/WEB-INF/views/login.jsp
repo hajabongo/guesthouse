@@ -77,8 +77,8 @@
 			 	</div>
 			  	<div class="panel-body">
 			  	<c:if test="${not empty error}">
-					<div class="alert alert-danger">
-						<h1 Niepoprawna nazwa użytkownika lub hasło/><br />
+					<div class="alert alert-danger" >
+						Niepoprawna nazwa użytkownika lub hasło
 					</div>
 				</c:if>
 			    	<form action="<c:url value="/j_spring_security_check"></c:url>" method="post">

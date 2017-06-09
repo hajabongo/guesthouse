@@ -59,51 +59,32 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-
 	<section>
-		<div style="background:#5bc0de  " class="jumbotron">
+		<div class="jumbotron">
 			<div class="container">
-				<br>
-				<br>
-				<h1> Witaj w "nazwa pensjonatu" </h1>
-				<p> Wyjątkowym i jedynym miejscu w "nazwa miasta" </p>
+				<h1>Rezerwacje</h1>
+				<p>Wszystkie rezerwacje</p>
 			</div>
 		</div>
 	</section>
-	
-	<!-- Dotąd kopiować -->
-	
-	<section>
-	
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">
-          <h2>Pokoje</h2>
-          <p>Oferujemy pokoje 2, 3 i 4 osobowe</p>
-          	<p>
-			<a href=" <spring:url value="/rooms" />
-			"class="btn btn-info">
-			<span class="glyphicon glyphicon-lamp" /></span> Szczegóły &raquo;</a>
-		</p>
-        </div>
-        <div class="col-md-4">
-          <h2>Rekreacja</h2>
-          <p>Wypoczynek, sport i nie tylko! </p>
-          <p>
-			<a href=" <spring:url value="/rooms" />
-			"class="btn btn-info">
-			<span class="glyphicon glyphicon-heart" /></span> Szczegóły &raquo;</a>
-       </div>
-        <div class="col-md-4">
-          <h2>Wyżywienie</h2>
-          <p>Sprawdź co dla Państwa możemy zaoferować</p>
-         <p>
-			<a href=" <spring:url value="/rooms" />
-			"class="btn btn-info">
-			<span class="glyphicon glyphicon-list-alt" /></span> Szczegóły &raquo;</a>
-        </div>
-      </div>
+
+	<section class="container">
+		<div class="row">
+			<c:forEach items="${reservations}" var="reservation">
+				<div class="col-sm-6 col-md-3" style="padding-bottom: 15px">
+					<div class="thumbnail">
+						<div class="caption">
+							<h3>${reservation.id}</h3>
+							<h3>${reservation.dataReservation}</h3>
+							<h3>${reservation.dataStart}</h3>
+							<h3>${reservation.dataStop}</h3>
+							<h3>${reservation.idRoom}</h3>
+							<h3>${reservation.idClient}</h3>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
 	</section>
 </body>
 </html>

@@ -21,6 +21,4 @@ public class RoomServiceImpl implements RoomService {
 		return roomRepository.getRoomById(roomId);
 	}
 	
-	
-
 }

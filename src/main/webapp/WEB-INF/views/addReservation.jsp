@@ -72,38 +72,46 @@
 	</section>
 	
 	<!-- Dotąd kopiować -->
-	
-	<section>
-	
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">
-          <h2>Pokoje</h2>
-          <p>Oferujemy pokoje 2, 3 i 4 osobowe</p>
-          	<p>
-			<a href=" <spring:url value="/rooms" />
-			"class="btn btn-info">
-			<span class="glyphicon glyphicon-lamp" /></span> Szczegóły &raquo;</a>
-		</p>
-        </div>
-        <div class="col-md-4">
-          <h2>Rekreacja</h2>
-          <p>Wypoczynek, sport i nie tylko! </p>
-          <p>
-			<a href=" <spring:url value="/rooms" />
-			"class="btn btn-info">
-			<span class="glyphicon glyphicon-heart" /></span> Szczegóły &raquo;</a>
-       </div>
-        <div class="col-md-4">
-          <h2>Wyżywienie</h2>
-          <p>Sprawdź co dla Państwa możemy zaoferować</p>
-         <p>
-			<a href=" <spring:url value="/rooms" />
-			"class="btn btn-info">
-			<span class="glyphicon glyphicon-list-alt" /></span> Szczegóły &raquo;</a>
-        </div>
-      </div>
+
+	<section class="container">
+		<form:form modelAttribute="newReservation" class="form-horizontal">
+			<fieldset>
+				<legend>Rezerwacja</legend>
+
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="dataStart">dataStart</label>
+					<div class="col-lg-10">
+						<form:input id="dataStart" path="dataStart" type="text"
+							class="form:input-large" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="dataStop">dataStop</label>
+					<div class="col-lg-10">
+						<form:input id="dataStop" path="dataStop" type="text"
+							class="form:input-large" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="idRoom">idRoom</label>
+					<div class="col-lg-10">
+						<form:input id="idRoom" path="idRoom" type="text"
+							class="form:input-large" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="idClient">idClient</label>
+					<div class="col-lg-10">
+						<form:input id="idClient" path="idClient" type="text"
+							class="form:input-large" />
+					</div>
+				</div>
+			</fieldset>
+		</form:form>
 	</section>
+
 </body>
 </html>

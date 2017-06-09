@@ -10,65 +10,74 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "client")
 public class Client {
-	
+
 	private static long idClient;
 
 	@Id
-	@Column(name="id_client")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "id_client")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
-	@Column(name="name")
+
+	@Column(name = "name")
 	private String name;
-	
-	@Column(name="surname")
+
+	@Column(name = "surname")
 	private String surname;
-	
-	@Column(name="country")
+
+	@Column(name = "country")
 	private String country;
-	
-	@Column(name="phone_number")
+
+	@Column(name = "phone_number")
 	private String phoneNumber;
-	
-	@Column(name="email_adress")
+
+	@Column(name = "email_adress")
 	private String emailAdress;
-	
-	@Column(name="client_login")
+
+	@Column(name = "client_login")
 	private String clientLogin;
-	
-	@Column(name="client_password")
+
+	@Column(name = "client_password")
 	private String clientPassword;
-	
+
 	public Client() {
-		id = getId();
+		super();
+		nextID();
 	}
-	
+
 	public long nextID() {
 		return ++idClient;
 	}
-	
-	
-	//------------------
+
+	// ------------------------------
+
+	public static long getIdClient() {
+		return idClient;
+	}
+
+	public static void setIdClient(long idClient) {
+		Client.idClient = idClient;
+	}
+
 	public long getId() {
 		return id;
 	}
-	
+
 	public void setId(long id) {
 		this.id = id;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public String getSurname() {
 		return surname;
 	}
-	
+
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}

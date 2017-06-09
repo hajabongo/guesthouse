@@ -1,6 +1,7 @@
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -47,8 +48,11 @@
       </ul>
       
           <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Rejestracja</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logowanie</a></li>
+      <li><a href=<spring:url value="/add" />><span class="glyphicon glyphicon-user"></span> Rejestracja</a></li>
+      <li><a href=<spring:url value="/login" />><span class="glyphicon glyphicon-log-in"></span> Logowanie</a></li>
+      <sec:authorize access="isAuthenticated()">
+	  	  <li><a href=<c:url value="/j_spring_security_logout" />><span class="glyphicon glyphicon-log-in"></span> Wyloguj</a></li>
+	  </sec:authorize>
     </ul>
 
     </div><!-- /.navbar-collapse -->
