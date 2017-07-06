@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "reservation")
@@ -20,11 +23,13 @@ public class Reservation {
 
 	@Column(name = "data_reservation")
 	private String dataReservation;
-
+	
 	@Column(name = "data_start")
+	@Pattern(regexp = "^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$", message="{Reservation.dataStart.Pattern.validation}")
 	private String dataStart;
 
 	@Column(name = "data_stop")
+	@Pattern(regexp = "^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$", message="{Reservation.dataStop.Pattern.validation}")
 	private String dataStop;
 
 	@Column(name = "id_room")

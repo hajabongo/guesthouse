@@ -2,6 +2,7 @@ package guesthouse.domain.repository.impl;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -20,26 +21,40 @@ public class ClientRepositoryImpl implements ClientRepository {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Client> getAllClients() {
 		Session session = this.sessionFactory.getCurrentSession();
 		List<Client> clientList = session.createQuery("from Client").list();
 		return clientList;
 	}
-	
-	public void addClient(Client newClient) {	
-		
-//			newClient.setName("Daniel");
-//			newClient.setSurname("Rejsz");
-//			newClient.setCountry("Kudowa-Zdrój");
-//			newClient.setPhoneNumber("609721828");
-//			newClient.setEmailAdress("hajabongo@gmail.com");
-//			newClient.setClientLogin("login");
-//			newClient.setClientPassword("password");
-		
+
+	public void addClient(Client newClient) {
 		Session session = this.sessionFactory.getCurrentSession();
 		session.persist(newClient);
 	}
 
+	public Client findClientById(int id) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Client client = (Client) session.load(Client.class, new Integer(id));
+		System.out.println(client.getName());
+		return client;
+	}
+
+	public Client findClientByLogin(String login) {
+		List<Client> clientList = getAllClients();
+		Client client = new Client();
+		try {
+			for (Client c : clientList) {
+				if (c.getClientLogin().equals(login)) {
+					client = c;
+					System.out.println("Witaj " + client.getName());
+					return client;
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("Brak loginu w bd");
+		}
+		return client;
+	}
 }

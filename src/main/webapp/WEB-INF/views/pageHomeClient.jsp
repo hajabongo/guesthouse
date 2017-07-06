@@ -75,60 +75,20 @@
 					</sec:authorize>
 				</ul>
 
-
 			</div>
 			<!-- /.navbar-collapse -->
 		</div>
 		<!-- /.container-fluid -->
 	</nav>
-
-
+	
 	<section>
 		<div style="background: #5bc0de" class="jumbotron">
 			<div class="container">
 				<br> <br>
-				<h1>Witaj w "nazwa pensjonatu"</h1>
-				<p>Wyjątkowym i jedynym miejscu w "nazwa miasta"</p>
+				<h1>Witaj ${client.name} ${client.surname}</h1>
 			</div>
 		</div>
 	</section>
-
-	<!-- Dotąd kopiować -->
-
-	<section>
-
-		<div class="container">
-			<!-- Example row of columns -->
-			<div class="row">
-				<div class="col-md-4">
-					<h2>Pokoje</h2>
-					<p>Oferujemy pokoje 2, 3 i 4 osobowe</p>
-					<p>
-						<a href=" <spring:url value="/rooms" />
-			" class="btn btn-info">
-							<span class="glyphicon glyphicon-lamp" /></span> Szczegóły &raquo;
-						</a>
-					</p>
-				</div>
-				<div class="col-md-4">
-					<h2>Rekreacja</h2>
-					<p>Wypoczynek, sport i nie tylko!</p>
-					<p>
-						<a href=" <spring:url value="/rooms" />
-			" class="btn btn-info">
-							<span class="glyphicon glyphicon-heart" /></span> Szczegóły &raquo;
-						</a>
-				</div>
-				<div class="col-md-4">
-					<h2>Wyżywienie</h2>
-					<p>Sprawdź co dla Państwa możemy zaoferować</p>
-					<p>
-						<a href=" <spring:url value="/rooms" />
-			" class="btn btn-info">
-							<span class="glyphicon glyphicon-list-alt" /></span> Szczegóły &raquo;
-						</a>
-				</div>
-			</div>
-	</section>
+	
 </body>
 </html>

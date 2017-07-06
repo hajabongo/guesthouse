@@ -26,12 +26,6 @@ public class ReservationController {
 	private ReservationService reservationService;
 	@Autowired
 	private RoomService roomService;
-
-//	@RequestMapping("/reservation")
-//	public String process(@RequestParam("id") String roomId) {
-//		reservationService.processReservation(roomId);
-//		return "redirect:/client";
-//	}
 	
 	@RequestMapping(value = "/reservation/add", method = RequestMethod.GET) 
 	public String addReservation(Model model) {
@@ -46,6 +40,9 @@ public class ReservationController {
 		return "redirect:/client";
 	}
 
+	
+	
+	
 	// Admin
 	@RequestMapping(value = "/reservations", method = RequestMethod.GET)
 	public String getAllClients(Model model) {

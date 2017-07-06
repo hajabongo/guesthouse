@@ -122,8 +122,6 @@
 										<form:form modelAttribute="reservation"
 											class="form-horizontal">
 
-
-
 											<div class="form-group ">
 												<label class="control-label " for="date"> Od </label>
 												<div class="input-group">
@@ -133,6 +131,7 @@
 													<form:input class="form-control" id="date" name="date"
 														path="dataStart" placeholder="yyyy-mm-dd" type="text" />
 												</div>
+												<form:errors path="dataStart" cssClass="text-danger" />
 											</div>
 
 											<div class="form-group ">
@@ -144,6 +143,7 @@
 													<form:input class="form-control" id="date1" name="date1"
 														path="dataStop" placeholder="yyyy-mm-dd" type="text" />
 												</div>
+												<form:errors path="dataStop" cssClass="text-danger" />
 											</div>
 											<div class="form-group">
 												<br></br>
@@ -203,7 +203,6 @@
 
 		<div class="col-sm-9 col-md-9" style="background-color: white;">
 			<div class="row">
-				<h3>${reservation.dataStart}</h3>
 				<c:forEach items="${rooms}" var="room">
 					<div class="col-sm-6 col-md-4" style="padding-bottom: 15px">
 						<div class="thumbnail">

@@ -21,6 +21,7 @@ public class ReservationRepositoryImpl implements ReservationRepository {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	//wszystkie rezerwacje
 	@SuppressWarnings("unchecked")
 	public List<Reservation> getAllReservations() {
 		Session session = this.sessionFactory.getCurrentSession();
@@ -32,13 +33,10 @@ public class ReservationRepositoryImpl implements ReservationRepository {
 	@SuppressWarnings("unchecked")
 	public List<Reservation> getAllFilterReservations(String dataStart, String dataStop) {
 		Session session = this.sessionFactory.getCurrentSession();
-		//from Reservation where ('2017-06-04' between data_start and data_stop) OR ('2017-06-05' between data_start and data_stop) OR (data_start between '2017-06-04' AND '2017-06-05')
 		List<Reservation> reservationList = session.createQuery("from Reservation where '"
 				+ dataStart + "' BETWEEN data_start AND data_stop OR '"
 				+ dataStop + "' BETWEEN data_start AND data_stop OR "
 				+ "data_start BETWEEN '" + dataStart + "' AND '" + dataStop + "'").list();
-				//" data_start between '" + dataStart + 
-				//"' and '" + dataStop +"'").list();
 		return reservationList;
 	}
 	
@@ -46,6 +44,7 @@ public class ReservationRepositoryImpl implements ReservationRepository {
 		Session session = this.sessionFactory.getCurrentSession();
 	}
 	
+	//dodaj rezerwacje
 	public void addReservation(Reservation newReservation) {
 		Session session = this.sessionFactory.getCurrentSession();
 		session.persist(newReservation);

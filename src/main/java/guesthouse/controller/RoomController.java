@@ -5,9 +5,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,8 +46,11 @@ public class RoomController {
 	
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String addFilter1(@ModelAttribute("reservation") Reservation reservation, Model model) {
-		System.out.println(reservation.getDataStart());
+	public String addFilter1(@ModelAttribute("reservation")@Valid Reservation reservation, BindingResult result, Model model) {
+		if(result.hasErrors()) {
+			return "rooms";
+		}
+		
 		List<Room> newList = new ArrayList<Room>();
 		List<Reservation> allFilterReservation = new ArrayList<Reservation>();
 		for (Room r : roomService.getAllRooms()) {

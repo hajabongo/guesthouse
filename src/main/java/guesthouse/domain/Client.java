@@ -6,6 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "client")
@@ -16,28 +21,36 @@ public class Client {
 	@Id
 	@Column(name = "id_client")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private int id;
 
 	@Column(name = "name")
+	@NotEmpty(message = "{Client.name.NotNull.validation}")
 	private String name;
 
 	@Column(name = "surname")
+	@NotEmpty(message = "{Client.surname.NotNull.validation}")
 	private String surname;
 
 	@Column(name = "country")
+	@NotEmpty(message = "{Client.country.NotNull.validation}")
 	private String country;
 
 	@Column(name = "phone_number")
+	@Size(min = 9, max = 9, message = "{Client.phoneNumber.Size.validation}")
 	private String phoneNumber;
 
 	@Column(name = "email_adress")
+	@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message = "{Client.emailAdress.Regexp.validation}")
 	private String emailAdress;
 
 	@Column(name = "client_login")
+	@NotEmpty(message = "{Client.login.NotNull.validation}")
 	private String clientLogin;
 
 	@Column(name = "client_password")
+	@NotEmpty(message = "{Client.password.NotNull.validation}")
 	private String clientPassword;
+
 
 	public Client() {
 		super();
@@ -58,11 +71,11 @@ public class Client {
 		Client.idClient = idClient;
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

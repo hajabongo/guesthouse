@@ -28,4 +28,16 @@ public class ClientServiceImpl implements ClientService {
 	public void addClient(Client newClient) {
 		clientRepository.addClient(newClient);
 	}
+	
+	@Transactional
+	public Client findClientById(int id) {
+		return clientRepository.findClientById(id);
+	}
+	
+	@Transactional
+	public Client findClientByLogin(String login) {
+		return clientRepository.findClientByLogin(login);
+	}
+	
+	
 }
