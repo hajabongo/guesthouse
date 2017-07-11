@@ -21,7 +21,7 @@
 <title>Witaj</title>
 </head>
 <body>
-
+<div style="background: #993300" >
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<!-- Grupowanie "marki" i przycisku rozwijania mobilnego menu -->
@@ -82,12 +82,13 @@
 		<!-- /.container-fluid -->
 	</nav>
 
-
 	<section>
+	
 		<div style="background: #5bc0de" class="jumbotron">
 			<div class="container">
 				<br> <br>
-				<h1>Witaj w "nazwa pensjonatu"</h1>
+				<!-- kolor tekstu -->
+				<font color="red"><h1>Witaj w "nazwa pensjonatu"</h1></font>
 				<p>Wyjątkowym i jedynym miejscu w "nazwa miasta"</p>
 			</div>
 		</div>
@@ -96,12 +97,14 @@
 	<!-- Dotąd kopiować -->
 
 	<section>
-
+	<div style="background: #CC6633" >
 		<div class="container">
 			<!-- Example row of columns -->
-			<div class="row">
+			<div class="row" >
 				<div class="col-md-4">
 					<h2>Pokoje</h2>
+					<img src="<c:url value="/resource/images/1.jpg"></c:url>"
+						alt="image" style="width: 100%" />
 					<p>Oferujemy pokoje 2, 3 i 4 osobowe</p>
 					<p>
 						<a href=" <spring:url value="/rooms" />
@@ -112,6 +115,8 @@
 				</div>
 				<div class="col-md-4">
 					<h2>Rekreacja</h2>
+					<img src="<c:url value="/resource/images/1.jpg"></c:url>"
+					alt="image" style="width: 100%" />
 					<p>Wypoczynek, sport i nie tylko!</p>
 					<p>
 						<a href=" <spring:url value="/rooms" />
@@ -121,6 +126,8 @@
 				</div>
 				<div class="col-md-4">
 					<h2>Wyżywienie</h2>
+					<img src="<c:url value="/resource/images/1.jpg"></c:url>"
+					alt="image" style="width: 100%" />
 					<p>Sprawdź co dla Państwa możemy zaoferować</p>
 					<p>
 						<a href=" <spring:url value="/rooms" />

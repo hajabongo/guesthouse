@@ -1,5 +1,6 @@
 package guesthouse.domain.repository.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import guesthouse.domain.Client;
 import guesthouse.domain.repository.ClientRepository;
+import guesthouse.exeption.ClientDuplicateError;
 
 @Repository
 public class ClientRepositoryImpl implements ClientRepository {
@@ -31,7 +33,14 @@ public class ClientRepositoryImpl implements ClientRepository {
 
 	public void addClient(Client newClient) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.persist(newClient);
+		List<Client> clientList = getAllClients();
+		for (Client c : clientList) {
+			if (c.getClientLogin().equals(newClient.getClientLogin())) {
+				throw new ClientDuplicateError(newClient.getClientLogin());
+			} else {
+				session.persist(newClient);
+			}
+		}
 	}
 
 	public Client findClientById(int id) {

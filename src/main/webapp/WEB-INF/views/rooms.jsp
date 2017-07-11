@@ -48,190 +48,193 @@
 <title>Witaj</title>
 </head>
 <body>
+	<div style="background: #993300">
 
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-		<div class="container-fluid">
-			<!-- Grupowanie "marki" i przycisku rozwijania mobilnego menu -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target="#bs-example-navbar-collapse-2">
-					<span class="sr-only">Rozwiń nawigację</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a href=" <spring:url value="/" />" class="navbar-brand">Strona
-					główna</a>
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="container-fluid">
+				<!-- Grupowanie "marki" i przycisku rozwijania mobilnego menu -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target="#bs-example-navbar-collapse-2">
+						<span class="sr-only">Rozwiń nawigację</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a href=" <spring:url value="/" />" class="navbar-brand">Strona
+						główna</a>
+				</div>
+				<div class="collapse navbar-collapse"
+					id="bs-example-navbar-collapse-2">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#">Kontakt</a></li>
+						<li><a href="#">Informacje ogólne</a></li>
+						<li class="dropdown">
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="#">Akcja</a></li>
+								<li><a href="#">Inna akcja</a></li>
+								<li><a href="#">Coś jeszcze innego</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Oddzielone linki</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Jeszcze jeden oddzielony link</a></li>
+							</ul>
+						</li>
+					</ul>
+
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href=<spring:url value="/add" />><span
+								class="glyphicon glyphicon-user"></span> Rejestracja</a></li>
+						<li><a href=<spring:url value="/login" />><span
+								class="glyphicon glyphicon-log-in"></span> Logowanie</a></li>
+						<sec:authorize access="isAuthenticated()">
+							<li><a href=<c:url value="/j_spring_security_logout" />><span
+									class="glyphicon glyphicon-log-in"></span> Wyloguj</a></li>
+						</sec:authorize>
+					</ul>
+
+				</div>
+				<!-- /.navbar-collapse -->
 			</div>
-			<div class="collapse navbar-collapse"
-				id="bs-example-navbar-collapse-2">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Kontakt</a></li>
-					<li><a href="#">Informacje ogólne</a></li>
-					<li class="dropdown">
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">Akcja</a></li>
-							<li><a href="#">Inna akcja</a></li>
-							<li><a href="#">Coś jeszcze innego</a></li>
-							<li class="divider"></li>
-							<li><a href="#">Oddzielone linki</a></li>
-							<li class="divider"></li>
-							<li><a href="#">Jeszcze jeden oddzielony link</a></li>
-						</ul>
-					</li>
-				</ul>
+			<!-- /.container-fluid -->
+		</nav>
 
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href=<spring:url value="/add" />><span
-							class="glyphicon glyphicon-user"></span> Rejestracja</a></li>
-					<li><a href=<spring:url value="/login" />><span
-							class="glyphicon glyphicon-log-in"></span> Logowanie</a></li>
-					<sec:authorize access="isAuthenticated()">
-						<li><a href=<c:url value="/j_spring_security_logout" />><span
-								class="glyphicon glyphicon-log-in"></span> Wyloguj</a></li>
-					</sec:authorize>
-				</ul>
 
+		<section>
+			<div style="background: #5bc0de" class="jumbotron">
+				<div class="container">
+					<br> <br>
+					<h1>Pokoje</h1>
+					<p>Wszystkie pokoje dostępne w naszym pensjonacie</p>
+				</div>
 			</div>
-			<!-- /.navbar-collapse -->
-		</div>
-		<!-- /.container-fluid -->
-	</nav>
+		</section>
 
+		<section class="container">
+			<div class="col-sm-3 col-md-3" style="background-color: white;">
+				<div class="row">
+					<div class="col-sm-3 col-md-12 sidebar">
+						<ul class="nav nav-sidebar">
+							<!-- HTML Form (wrapped in a .bootstrap-iso div) -->
+							<div class="bootstrap-iso">
+								<div class="container-fluid">
+									<div class="row">
+										<div class="col-md-12 col-sm-6 col-xs-12">
 
-	<section>
-		<div style="background: #5bc0de" class="jumbotron">
-			<div class="container">
-				<br> <br>
-				<h1>Pokoje</h1>
-				<p>Wszystkie pokoje dostępne w naszym pensjonacie</p>
-			</div>
-		</div>
-	</section>
+											<form:form modelAttribute="reservation"
+												class="form-horizontal">
 
-	<section class="container">
-		<div class="col-sm-3 col-md-3" style="background-color: white;">
-			<div class="row">
-				<div class="col-sm-3 col-md-12 sidebar">
-					<ul class="nav nav-sidebar">
-						<!-- HTML Form (wrapped in a .bootstrap-iso div) -->
-						<div class="bootstrap-iso">
-							<div class="container-fluid">
-								<div class="row">
-									<div class="col-md-12 col-sm-6 col-xs-12">
-
-										<form:form modelAttribute="reservation"
-											class="form-horizontal">
-
-											<div class="form-group ">
-												<label class="control-label " for="date"> Od </label>
-												<div class="input-group">
-													<div class="input-group-addon">
-														<i class="fa fa-calendar"> </i>
+												<div class="form-group ">
+													<label class="control-label " for="date"> Od </label>
+													<div class="input-group">
+														<div class="input-group-addon">
+															<i class="fa fa-calendar"> </i>
+														</div>
+														<form:input class="form-control" id="date" name="date"
+															path="dataStart" placeholder="yyyy-mm-dd" type="text" />
 													</div>
-													<form:input class="form-control" id="date" name="date"
-														path="dataStart" placeholder="yyyy-mm-dd" type="text" />
+													<form:errors path="dataStart" cssClass="text-danger" />
 												</div>
-												<form:errors path="dataStart" cssClass="text-danger" />
-											</div>
 
-											<div class="form-group ">
-												<label class="control-label " for="date1"> Do </label>
-												<div class="input-group">
-													<div class="input-group-addon">
-														<i class="fa fa-calendar"> </i>
+												<div class="form-group ">
+													<label class="control-label " for="date1"> Do </label>
+													<div class="input-group">
+														<div class="input-group-addon">
+															<i class="fa fa-calendar"> </i>
+														</div>
+														<form:input class="form-control" id="date1" name="date1"
+															path="dataStop" placeholder="yyyy-mm-dd" type="text" />
 													</div>
-													<form:input class="form-control" id="date1" name="date1"
-														path="dataStop" placeholder="yyyy-mm-dd" type="text" />
+													<form:errors path="dataStop" cssClass="text-danger" />
 												</div>
-												<form:errors path="dataStop" cssClass="text-danger" />
-											</div>
-											<div class="form-group">
-												<br></br>
-												<div>
-													<button class="btn btn-primary " name="submit"
-														type="submit">
-														<span class="glyphicon glyphicon-search"></span> Sprawdź
-														dostępność
-													</button>
+												<div class="form-group">
+													<br></br>
+													<div>
+														<button class="btn btn-primary " name="submit"
+															type="submit">
+															<span class="glyphicon glyphicon-search"></span> Sprawdź
+															dostępność
+														</button>
+													</div>
 												</div>
-											</div>
-										</form:form>
+											</form:form>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
 
-						<script>
-							$(document)
-									.ready(
-											function() {
-												var date_input = $('input[name="date"]');
-												var container = $('.bootstrap-iso form').length > 0 ? $(
-														'.bootstrap-iso form')
-														.parent()
-														: "body";
-												date_input.datepicker({
-													format : 'yyyy-mm-dd',
-													container : container,
-													todayHighlight : true,
-													autoclose : true,
+							<script>
+								$(document)
+										.ready(
+												function() {
+													var date_input = $('input[name="date"]');
+													var container = $('.bootstrap-iso form').length > 0 ? $(
+															'.bootstrap-iso form')
+															.parent()
+															: "body";
+													date_input.datepicker({
+														format : 'yyyy-mm-dd',
+														container : container,
+														todayHighlight : true,
+														autoclose : true,
+													})
 												})
-											})
-						</script>
-						<script>
-							$(document)
-									.ready(
-											function() {
-												var date_input = $('input[name="date1"]');
-												var container = $('.bootstrap-iso form').length > 0 ? $(
-														'.bootstrap-iso form')
-														.parent()
-														: "body";
-												date_input.datepicker({
-													format : 'yyyy-mm-dd',
-													container : container,
-													todayHighlight : true,
-													autoclose : true,
+							</script>
+							<script>
+								$(document)
+										.ready(
+												function() {
+													var date_input = $('input[name="date1"]');
+													var container = $('.bootstrap-iso form').length > 0 ? $(
+															'.bootstrap-iso form')
+															.parent()
+															: "body";
+													date_input.datepicker({
+														format : 'yyyy-mm-dd',
+														container : container,
+														todayHighlight : true,
+														autoclose : true,
+													})
 												})
-											})
-						</script>
-					</ul>
+							</script>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="col-sm-9 col-md-9" style="background-color: white;">
+				<div class="row">
+					<c:forEach items="${rooms}" var="room">
+						<div class="col-sm-6 col-md-4" style="padding-bottom: 15px">
+							<div class="thumbnail">
+								<div class="caption">
+									<h3>${room.roomId}</h3>
+									<img src="<c:url value="/resource/images/1.jpg"></c:url>"
+						alt="image" style="width: 100%" />
+									<p>${room.description}</p>
+									<p>${room.price}PLN</p>
+									<p>Wolny? ${room.free}</p>
+									<p>
+										<a
+											href=" <spring:url value="/rooms/room?id=${room.roomId }" />
+								"
+											class="btn btn=primary"> <span
+											class="glyphicon-info-sign glyphicon" /></span> Szczegóły
+										</a>
+									</p>
+									<p>
+										<a href=" <spring:url value="/reservation/add" />"
+											class="btn btn=primary"><span
+											class="glyphicon glyphicon-hand-right" /></span> Zarezerwuj &raquo;</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
 				</div>
 			</div>
 
-		</div>
-
-		<div class="col-sm-9 col-md-9" style="background-color: white;">
-			<div class="row">
-				<c:forEach items="${rooms}" var="room">
-					<div class="col-sm-6 col-md-4" style="padding-bottom: 15px">
-						<div class="thumbnail">
-							<div class="caption">
-								<h3>${room.roomId}</h3>
-								<p>${room.description}</p>
-								<p>${room.price}PLN</p>
-								<p>Wolny? ${room.free}</p>
-								<p>
-									<a
-										href=" <spring:url value="/rooms/room?id=${room.roomId }" />
-								"
-										class="btn btn=primary"> <span
-										class="glyphicon-info-sign glyphicon" /></span> Szczegóły
-									</a>
-								</p>
-								<p>
-									<a href=" <spring:url value="/reservation/add" />"
-										class="btn btn=primary"><span
-										class="glyphicon glyphicon-hand-right" /></span> Zarezerwuj &raquo;</a>
-								</p>
-							</div>
-						</div>
-					</div>
-				</c:forEach>
-			</div>
-		</div>
-
-	</section>
+		</section>
 </body>
 <!-- Extra JavaScript/CSS added manually in "Settings" tab -->
 <!-- Include jQuery -->
