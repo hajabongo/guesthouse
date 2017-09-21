@@ -7,6 +7,7 @@ package guesthouse.domain;
 public class Room {
 	
 	private String roomId; //nr pokoju
+	private int size; //iloœæ osób w pokoju
 	private String description; //opis
 	private double price; //cena
 	private boolean free = true; //stan, czy pokój jest wolny lub zarezerwowany
@@ -16,8 +17,9 @@ public class Room {
 		super();
 	}
 	
-	public Room(String roomId, double price, int storey) {
+	public Room(String roomId, int size, double price, int storey) {
 		this.roomId = roomId;
+		this.size = size;
 		this.description = description;
 		this.price = price;
 		this.storey = storey;
@@ -88,5 +90,13 @@ public class Room {
 
 	public void setStorey(int storey) {
 		this.storey = storey;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
 	}
 }

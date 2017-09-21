@@ -12,4 +12,19 @@ public class HomeController {
 	public String welcome() {
 		return "home";
 	}
+	
+	@RequestMapping("/information")
+	public String information() {
+		return "information";
+	}
+	
+	@RequestMapping("/recreation")
+	public String recreation() {
+		return "recreation";
+	}
+	
+	@RequestMapping("/restaurant")
+	public String restaurant() {
+		return "restaurant";
+	}
 }

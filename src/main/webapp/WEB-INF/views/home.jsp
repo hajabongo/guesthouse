@@ -18,13 +18,11 @@
 <!-- Latest compiled JavaScript -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<title>Witaj</title>
+<title>Guesthouse</title>
 </head>
 <body>
-<div style="background: #993300" >
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
-			<!-- Grupowanie "marki" i przycisku rozwijania mobilnego menu -->
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
 					data-target="#bs-example-navbar-collapse-2">
@@ -38,22 +36,18 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-2">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Kontakt</a></li>
-					<li><a href="#">Informacje ogólne</a></li>
-					<li class="dropdown">
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">Akcja</a></li>
-							<li><a href="#">Inna akcja</a></li>
-							<li><a href="#">Coś jeszcze innego</a></li>
-							<li class="divider"></li>
-							<li><a href="#">Oddzielone linki</a></li>
-							<li class="divider"></li>
-							<li><a href="#">Jeszcze jeden oddzielony link</a></li>
-						</ul>
-					</li>
+					<li class="active"><a
+						href=" <spring:url value="/information" />">Kontakt</a></li>
 				</ul>
-
 				<ul class="nav navbar-nav navbar-right">
+					<sec:authorize access="hasRole('ROLE_ADMIN')">
+						<li><a href=<c:url value="/admin/reservations" />><span
+								class="glyphicon glyphicon-log-in"></span> Rezerwacje</a></li>
+					</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_ADMIN')">
+						<li><a href=<c:url value="/admin/clients" />><span
+								class="glyphicon glyphicon-log-in"></span> Klienci</a></li>
+					</sec:authorize>
 					<sec:authorize ifAnyGranted="ROLE_ANONYMOUS">
 						<li><a href=<spring:url value="/add" />><span
 								class="glyphicon glyphicon-user"></span> Rejestracja</a></li>
@@ -74,22 +68,20 @@
 								class="glyphicon glyphicon-log-in"></span> Wyloguj</a></li>
 					</sec:authorize>
 				</ul>
-
-
 			</div>
-			<!-- /.navbar-collapse -->
 		</div>
-		<!-- /.container-fluid -->
 	</nav>
 
 	<section>
-	
-		<div style="background: #5bc0de" class="jumbotron">
+		<div style="background: #66FF33" class="jumbotron">
 			<div class="container">
 				<br> <br>
-				<!-- kolor tekstu -->
-				<font color="red"><h1>Witaj w "nazwa pensjonatu"</h1></font>
-				<p>Wyjątkowym i jedynym miejscu w "nazwa miasta"</p>
+				<h1>
+					<strong><font
+						face="'Algerian',Times New Roman','Courier New'">Witaj w
+							Guesthouse</font></strong>
+				</h1>		
+				<p>Jedynym takim miejscu w Kudowie-Zdrój</p>
 			</div>
 		</div>
 	</section>
@@ -97,13 +89,14 @@
 	<!-- Dotąd kopiować -->
 
 	<section>
-	<div style="background: #CC6633" >
 		<div class="container">
 			<!-- Example row of columns -->
-			<div class="row" >
+			<div class="row">
 				<div class="col-md-4">
-					<h2>Pokoje</h2>
-					<img src="<c:url value="/resource/images/1.jpg"></c:url>"
+					<h2>
+						<font face="'Algerian',Times New Roman','Courier New'">Pokoje</font>
+					</h2>
+					<img src="<c:url value="/resource/images/room.jpg"></c:url>"
 						alt="image" style="width: 100%" />
 					<p>Oferujemy pokoje 2, 3 i 4 osobowe</p>
 					<p>
@@ -114,28 +107,35 @@
 					</p>
 				</div>
 				<div class="col-md-4">
-					<h2>Rekreacja</h2>
-					<img src="<c:url value="/resource/images/1.jpg"></c:url>"
-					alt="image" style="width: 100%" />
+					<h2>
+						<font face="'Algerian',Times New Roman','Courier New'">Rekreacja</font>
+					</h2>
+					<img src="<c:url value="/resource/images/hammock.jpg"></c:url>"
+						alt="image" style="width: 100%" />
 					<p>Wypoczynek, sport i nie tylko!</p>
 					<p>
-						<a href=" <spring:url value="/rooms" />
-			" class="btn btn-info">
-							<span class="glyphicon glyphicon-heart" /></span> Szczegóły &raquo;
+						<a href=" <spring:url value="/recreation" />
+			"
+							class="btn btn-info"> <span class="glyphicon glyphicon-heart" /></span>
+							Szczegóły &raquo;
 						</a>
 				</div>
 				<div class="col-md-4">
-					<h2>Wyżywienie</h2>
-					<img src="<c:url value="/resource/images/1.jpg"></c:url>"
-					alt="image" style="width: 100%" />
+					<h2>
+						<font face="'Algerian',Times New Roman','Courier New'">Restauracja</font>
+					</h2>
+					<img src="<c:url value="/resource/images/restaurant.jpeg"></c:url>"
+						alt="image" style="width: 100%" />
 					<p>Sprawdź co dla Państwa możemy zaoferować</p>
 					<p>
-						<a href=" <spring:url value="/rooms" />
-			" class="btn btn-info">
-							<span class="glyphicon glyphicon-list-alt" /></span> Szczegóły &raquo;
+						<a href=" <spring:url value="/restaurant" />
+			"
+							class="btn btn-info"> <span
+							class="glyphicon glyphicon-list-alt" /></span> Szczegóły &raquo;
 						</a>
 				</div>
-			</div>
+				<hr class="featurette-divider">
 	</section>
+	<hr class="featurette-divider">
 </body>
 </html>

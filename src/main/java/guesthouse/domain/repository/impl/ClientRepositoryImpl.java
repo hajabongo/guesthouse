@@ -34,19 +34,24 @@ public class ClientRepositoryImpl implements ClientRepository {
 	public void addClient(Client newClient) {
 		Session session = this.sessionFactory.getCurrentSession();
 		List<Client> clientList = getAllClients();
-		for (Client c : clientList) {
-			if (c.getClientLogin().equals(newClient.getClientLogin())) {
-				throw new ClientDuplicateError(newClient.getClientLogin());
-			} else {
-				session.persist(newClient);
-			}
+		
+		try {
+			session.persist(newClient);
+		}
+		catch (Exception e) {
+			throw new ClientDuplicateError(newClient.getClientLogin());
 		}
 	}
 
 	public Client findClientById(int id) {
-		Session session = this.sessionFactory.getCurrentSession();
-		Client client = (Client) session.load(Client.class, new Integer(id));
-		System.out.println(client.getName());
+		List<Client> all = getAllClients();
+		Client client = new Client();
+		for(Client c : all) {
+			if(c.getId()==id) {
+				client = c;
+				break;
+			}
+		}
 		return client;
 	}
 
@@ -57,7 +62,6 @@ public class ClientRepositoryImpl implements ClientRepository {
 			for (Client c : clientList) {
 				if (c.getClientLogin().equals(login)) {
 					client = c;
-					System.out.println("Witaj " + client.getName());
 					return client;
 				}
 			}
@@ -65,5 +69,15 @@ public class ClientRepositoryImpl implements ClientRepository {
 			System.out.println("Brak loginu w bd");
 		}
 		return client;
+	}
+
+	public void updateClient(Client client) {
+		Session session = this.sessionFactory.getCurrentSession();
+		session.update(client);
+	}
+	
+	public void deleteClient(Client client) {
+		Session session = this.sessionFactory.getCurrentSession();
+		session.delete(client);
 	}
 }

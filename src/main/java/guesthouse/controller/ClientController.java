@@ -23,8 +23,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import guesthouse.domain.Client;
+import guesthouse.domain.UserRole;
 import guesthouse.exeption.ClientDuplicateError;
 import guesthouse.service.ClientService;
+import guesthouse.service.ReservationService;
+import guesthouse.service.UserRoleService;
 
 @Controller
 public class ClientController {
@@ -32,29 +35,36 @@ public class ClientController {
 	@Autowired
 	private ClientService clientService;
 
+	@Autowired
+	private UserRoleService userRoleService;
+	
+	@Autowired
+	private ReservationService reservationService;
+
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String form(Model model) {
+	public String addClient1(Model model) {
 		Client newClient = new Client();
 		model.addAttribute("newClient", newClient);
 		return "addClient";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addClient(@ModelAttribute("newClient") @Valid Client newClient, BindingResult result) {
+	public String addClient2(@ModelAttribute("newClient") @Valid Client newClient, BindingResult result) {
+		
 		if (result.hasErrors()) {
 			return "addClient";
 		}
 		
+		UserRole userRole = new UserRole();
+		userRole.setClientLogin(newClient.getClientLogin());
+		userRole.setClientRole("ROLE_CLIENT");
+
 		clientService.addClient(newClient);
-		// if(clientService.findClientByLogin(newClient.getClientLogin()) ==
-		// true) {
-		// System.out.println("w bazie danych jest ju¿ podany login");
-		// }else {
-		// System.out.println("w bazie danych nie ma loginu");
-		// }
-		return "redirect:/";
+		userRoleService.addUserRole(userRole);
+		return "redirect:/login";
 	}
 
+	//wyj¹tek jeœli istnieje w bazie danych ten sam login
 	@ExceptionHandler(ClientDuplicateError.class)
 	public ModelAndView duplicateLogin(HttpServletRequest req, ClientDuplicateError error) {
 		ModelAndView m = new ModelAndView();
@@ -62,25 +72,35 @@ public class ClientController {
 		m.setViewName("duplicateLogin");
 		return m;
 	}
-	
-//	@ExceptionHandler(ClientDuplicateError.class)
-//	public String duplicateLogin(ClientDuplicateError error, Model m) {
-//		m.addAttribute("errorLogin", error.getClientLogin());
-//		return "addClient";
-//	}
-	
+
+
 	@RequestMapping(value = "/client/home", method = RequestMethod.GET)
 	public String pageHome(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String login = auth.getName();
-		model.addAttribute("client", clientService.findClientByLogin(login));
-		return "pageHomeClient";
+		Client clientByLogin = clientService.findClientByLogin(login);
+		model.addAttribute("client", clientByLogin);
+		model.addAttribute("reservation", reservationService.getReservationsByClientId(clientByLogin));
+		return "pageClient";
+	}
+	
+	@RequestMapping(value = "/client/edit", method = RequestMethod.GET)
+	public String editClient1(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String login = auth.getName();
+		Client client = clientService.findClientByLogin(login);
+		model.addAttribute("client", client);
+		return "editClient";
+	}
+	
+	@RequestMapping(value = "/client/edit", method = RequestMethod.POST)
+	public String editClient2(@ModelAttribute("client") @Valid Client client, Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String login = auth.getName();
+		clientService.updateClient(client);
+		return "redirect:/client/home";
 	}
 
-	@RequestMapping(value = "/client")
-	public String client() {
-		return "pageHomeClient";
-	}
 
 	// do podgl¹du
 	@RequestMapping(value = "/clients", method = RequestMethod.GET)

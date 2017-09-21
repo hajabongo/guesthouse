@@ -29,6 +29,7 @@
 			<list>
 				<value>guesthouse.domain.Client</value>
 				<value>guesthouse.domain.Reservation</value>
+				<value>guesthouse.domain.UserRole</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

@@ -9,10 +9,10 @@
 
 	<security:http auto-config="true" use-expressions="true">
 		<security:intercept-url pattern="/reservation/add"
-			access="hasRole('ROLE_CLIENT')" />
+			access="hasAnyRole('ROLE_CLIENT', 'ROLE_ADMIN')" />
 		<security:intercept-url pattern="/client**"
 			access="hasRole('ROLE_CLIENT')" />
-		<security:intercept-url pattern="/clients"
+		<security:intercept-url pattern="/admin**"
 			access="hasRole('ROLE_ADMIN')" />
 
 
@@ -30,6 +30,12 @@
 				data-source-ref="dataSource"
 				users-by-username-query="select client_login, client_password, enabled from client where client_login=? "
 				authorities-by-username-query="select client_login, client_role from user_roles where client_login =?  " />
+		</security:authentication-provider>
+		<security:authentication-provider>
+			<security:user-service>
+				<security:user name="daniel" password="1234"
+					authorities="ROLE_ADMIN" />
+			</security:user-service>
 		</security:authentication-provider>
 	</security:authentication-manager>
 

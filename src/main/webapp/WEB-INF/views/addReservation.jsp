@@ -19,13 +19,12 @@
 <!-- Latest compiled JavaScript -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<title>Witaj</title>
+<title>Guesthouse</title>
 </head>
 <body>
 
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
-			<!-- Grupowanie "marki" i przycisku rozwijania mobilnego menu -->
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
 					data-target="#bs-example-navbar-collapse-2">
@@ -39,22 +38,17 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-2">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Kontakt</a></li>
-					<li><a href="#">Informacje ogólne</a></li>
-					<li class="dropdown">
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">Akcja</a></li>
-							<li><a href="#">Inna akcja</a></li>
-							<li><a href="#">Coś jeszcze innego</a></li>
-							<li class="divider"></li>
-							<li><a href="#">Oddzielone linki</a></li>
-							<li class="divider"></li>
-							<li><a href="#">Jeszcze jeden oddzielony link</a></li>
-						</ul>
-					</li>
+					<li class="active"><a href=" <spring:url value="/information" />">Kontakt</a></li>
 				</ul>
-
 				<ul class="nav navbar-nav navbar-right">
+					<sec:authorize access="hasRole('ROLE_ADMIN')">
+						<li><a href=<c:url value="/admin/reservations" />><span
+								class="glyphicon glyphicon-log-in"></span> Rezerwacje</a></li>
+					</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_ADMIN')">
+						<li><a href=<c:url value="/admin/clients" />><span
+								class="glyphicon glyphicon-log-in"></span> Klienci</a></li>
+					</sec:authorize>
 					<sec:authorize ifAnyGranted="ROLE_ANONYMOUS">
 						<li><a href=<spring:url value="/add" />><span
 								class="glyphicon glyphicon-user"></span> Rejestracja</a></li>
@@ -75,20 +69,20 @@
 								class="glyphicon glyphicon-log-in"></span> Wyloguj</a></li>
 					</sec:authorize>
 				</ul>
-
 			</div>
-			<!-- /.navbar-collapse -->
 		</div>
-		<!-- /.container-fluid -->
 	</nav>
 
-
 	<section>
-		<div style="background: #5bc0de" class="jumbotron">
+		<div style="background: #66FF33 " class="jumbotron">
 			<div class="container">
 				<br> <br>
-				<h1>Witaj w "nazwa pensjonatu"</h1>
-				<p>Wyjątkowym i jedynym miejscu w "nazwa miasta"</p>
+				<h1>
+					<strong><font
+						face="'Algerian',Times New Roman','Courier New'">Rezerwacja</font>		
+				</h1>
+				</strong>
+				<p>${room.description }</p>
 			</div>
 		</div>
 	</section>
@@ -97,43 +91,133 @@
 
 	<section class="container">
 		<form:form modelAttribute="newReservation" class="form-horizontal">
+			<form:errors path="*" cssClass="alert alert-danger" element="div" />
 			<fieldset>
-				<legend>Rezerwacja</legend>
+				<legend>Formularz rezerwacji</legend>
 
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="dataStart">dataStart</label>
+					<label class="control-label col-lg-2" for="nameClient">Imię</label>
 					<div class="col-lg-10">
-						<form:input id="dataStart" path="dataStart" type="text"
-							class="form:input-large" />
+						<div class="col-xs-3">
+							<input id="idRoom" type="text" value="${client.name}"
+								class="form-control" readonly="true" />
+
+						</div>
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="nameClient">Nazwisko</label>
+					<div class="col-lg-10">
+						<div class="col-xs-3">
+							<input id="idRoom" type="text" value="${client.surname}"
+								class="form-control" readonly="true" />
+						</div>
+					</div>
+				</div>
+
+
+				<div class="text-danger" role="alert">
+					<strong>${errorDate }</strong>
+				</div>
+
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="dataStart">Data
+						rozpoczęcia</label>
+					<div class="col-lg-10">
+						<div class="col-xs-3">
+							<form:input id="date-pick1" path="dataStart" type="text"
+								placeholder="yyyy-mm-dd" class="form-control" />
+							<form:errors path="dataStart" cssClass="text-danger" />
+						</div>
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="dataStop">dataStop</label>
+					<label class="control-label col-lg-2" for="dataStop">Data
+						zakończenia</label>
 					<div class="col-lg-10">
-						<form:input id="dataStop" path="dataStop" type="text"
-							class="form:input-large" />
+						<div class="col-xs-3">
+							<form:input id="date-pick2" path="dataStop" type="text"
+								placeholder="yyyy-mm-dd" class="form-control" />
+							<form:errors path="dataStop" cssClass="text-danger" />
+						</div>
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="idRoom">idRoom</label>
+					<label class="control-label col-lg-2" for="idRoom">Pokój nr
+					</label>
 					<div class="col-lg-10">
-						<form:input id="idRoom" path="idRoom" type="text"
-							class="form:input-large" />
+						<div class="col-xs-3">
+							<form:input id="idRoom" path="idRoom" type="text"
+								value="${room.roomId}" class="form-control" readonly="true" />
+							<form:errors path="idRoom" cssClass="text-danger" />
+						</div>
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="nameClient">Ilość
+						osób</label>
+					<div class="col-lg-10">
+						<div class="col-xs-3">
+							<input id="idRoom" type="text" value="${room.size}"
+								class="form-control" readonly="true" />
+						</div>
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="idClient">idClient</label>
-					<div class="col-lg-10">
-						<form:input id="idClient" path="idClient" type="text"
-							class="form:input-large" />
+					<div class="col-lg-offset-2 col-lg-10">
+						<input type="submit" id="btnAdd" class="btn btn-primary"
+							value="Złóż rezerwacje" />
 					</div>
 				</div>
+
 			</fieldset>
 		</form:form>
+		<hr class="featurette-divider">
 	</section>
 
+	<script type="text/javascript">
+		$(function() {
+			$('#date-pick1').datepicker({
+				showOn : "button",
+				format : 'yyyy-mm-dd',
+				disabled : true,
+				buttonImage : "calendar.png",
+				buttonImageOnly : true,
+				autoclose : true,
+			});
+		});
+	</script>
+
+	<script type="text/javascript">
+		$(function() {
+			$('#date-pick2').datepicker({
+				showOn : "button",
+				format : 'yyyy-mm-dd',
+				disabled : true,
+				buttonImage : "calendar.png",
+				buttonImageOnly : true,
+				autoclose : true,
+			});
+		});
+	</script>
+
 </body>
+<!-- Extra JavaScript/CSS added manually in "Settings" tab -->
+<!-- Include jQuery -->
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- Include Date Range Picker -->
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+
 </html>

@@ -1,5 +1,8 @@
 package guesthouse.domain;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,12 +18,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Reservation {
 
 	private static long idReservation;
-
+	
 	@Id
 	@Column(name = "id_reservation")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String id;
+	private int id;
 
+	
 	@Column(name = "data_reservation")
 	private String dataReservation;
 	
@@ -33,13 +37,18 @@ public class Reservation {
 	private String dataStop;
 
 	@Column(name = "id_room")
-	private String idRoom;
+	private int idRoom;
 
 	@Column(name = "id_client")
-	private String idClient;
+	private int idClient;
+	
+	@Column(name = "confirm")
+	private String confirm;
 
 	public Reservation() {
 		super();
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
+		dataReservation = date.format(new Date()); 
 		nextID();
 	}
 
@@ -57,11 +66,11 @@ public class Reservation {
 		Reservation.idReservation = idReservation;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -89,20 +98,28 @@ public class Reservation {
 		this.dataStop = dataStop;
 	}
 
-	public String getIdRoom() {
+	public int getIdRoom() {
 		return idRoom;
 	}
 
-	public void setIdRoom(String idRoom) {
+	public void setIdRoom(int idRoom) {
 		this.idRoom = idRoom;
 	}
 
-	public String getIdClient() {
+	public int getIdClient() {
 		return idClient;
 	}
 
-	public void setIdClient(String idClient) {
+	public void setIdClient(int idClient) {
 		this.idClient = idClient;
+	}
+
+	public String getConfirm() {
+		return confirm;
+	}
+
+	public void setConfirm(String confirm) {
+		this.confirm = confirm;
 	}
 
 }

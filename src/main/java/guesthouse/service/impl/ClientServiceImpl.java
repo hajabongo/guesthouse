@@ -39,5 +39,14 @@ public class ClientServiceImpl implements ClientService {
 		return clientRepository.findClientByLogin(login);
 	}
 	
+	@Transactional(readOnly = false)
+	public void updateClient(Client client) {
+		clientRepository.updateClient(client);
+	}
+
+	@Transactional(readOnly = false)
+	public void deleteClient(Client client) {
+		clientRepository.deleteClient(client);
+	}
 	
 }
