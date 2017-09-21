@@ -1,6 +1,9 @@
 package guesthouse.domain.repository.impl;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayDeque;
+
 import java.util.List;
 
 import org.hibernate.Session;
@@ -61,16 +64,21 @@ public class ReservationRepositoryImpl implements ReservationRepository {
 		}
 		return findReservation;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void addReservation(Reservation newReservation) {
 		newReservation.setConfirm("false");
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Reservation> list = reservationService.getAllFilterReservations(newReservation.getDataStart(), newReservation.getDataStop());
-		for(Reservation r : list) {
-			if(r.getIdRoom() == newReservation.getIdRoom()) {
-				throw new ReservationStartStopError(newReservation.getIdRoom(), newReservation.getDataStart(), newReservation.getDataStop());
-			} else { 
+		List<Reservation> list = reservationService.getAllFilterReservations(newReservation.getDataStart(),
+				newReservation.getDataStop());
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate dateTimeStart = LocalDate.parse(newReservation.getDataStart(), formatter);
+		LocalDate dateTimeStop = LocalDate.parse(newReservation.getDataStop(), formatter);
+		for (Reservation r : list) {
+			if (r.getIdRoom() == newReservation.getIdRoom() || dateTimeStart.isAfter(dateTimeStop)) {
+				throw new ReservationStartStopError(newReservation.getIdRoom(), newReservation.getDataStart(),
+						newReservation.getDataStop());
+			} else {
 				session.save(newReservation);
 			}
 		}
@@ -78,7 +86,8 @@ public class ReservationRepositoryImpl implements ReservationRepository {
 
 	public List<Reservation> getReservationsByClientId(Client client) {
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Reservation> getReservations = session.createQuery("from Reservation where id_client = " + client.getId()).list();
+		List<Reservation> getReservations = session.createQuery("from Reservation where id_client = " + client.getId())
+				.list();
 		return getReservations;
 	}
 
@@ -99,14 +108,13 @@ public class ReservationRepositoryImpl implements ReservationRepository {
 		reservation.setConfirm("true");
 		session.update(reservation);
 	}
-	
+
 	public void breakReservation(Reservation reservation) {
 		Session session = this.sessionFactory.getCurrentSession();
 		reservation.setConfirm("break");
 		session.update(reservation);
 	}
 
-	
 	public ArrayDeque<Reservation> getConfirmReservations() {
 		Session session = this.sessionFactory.getCurrentSession();
 		List<Reservation> getReservations = session.createQuery("from Reservation where confirm = 'true' ").list();
@@ -117,7 +125,6 @@ public class ReservationRepositoryImpl implements ReservationRepository {
 		return quene;
 	}
 
-	
 	public ArrayDeque<Reservation> getBreakReservations() {
 		Session session = this.sessionFactory.getCurrentSession();
 		List<Reservation> getReservations = session.createQuery("from Reservation where confirm = 'break' ").list();
@@ -128,7 +135,6 @@ public class ReservationRepositoryImpl implements ReservationRepository {
 		return quene;
 	}
 
-	
 	public ArrayDeque<Reservation> getWaitingReservations() {
 		Session session = this.sessionFactory.getCurrentSession();
 		ArrayDeque<Reservation> quene = new ArrayDeque<Reservation>();
@@ -138,16 +144,16 @@ public class ReservationRepositoryImpl implements ReservationRepository {
 		}
 		return quene;
 	}
-	
+
 	public void deleteReservation(Reservation reservation) {
 		Session session = this.sessionFactory.getCurrentSession();
 		session.delete(reservation);
 	}
-	
+
 	public void deleteReservationsByClientId(String clientId) {
-		int id = Integer.valueOf(clientId);	
+		int id = Integer.valueOf(clientId);
 		for (Reservation r : reservationService.getReservationsByClientId(clientService.findClientById(id))) {
 			reservationService.deleteReservation(r);
-		}	
-	}	
+		}
+	}
 }
